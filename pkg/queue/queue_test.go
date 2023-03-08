@@ -385,6 +385,54 @@ func Test_Queue_PushPop(t *testing.T) {
 	})
 }
 
+func Test_Queue_Peek(t *testing.T) {
+	t.Run("single threaded", func(t *testing.T) {
+		type test struct {
+			name string
+			data []int
+			peek [2]interface{}
+		}
+
+		datasets := map[string][]int{
+			"empty":    {},
+			"single":   {1},
+			"multiple": util.GenerateRandomIntSeries(1, 1000),
+		}
+
+		tests := []test{
+			{
+				name: "empty",
+				data: datasets["empty"],
+				peek: [2]interface{}{0, false},
+			},
+			{
+				name: "single element",
+				data: datasets["single"],
+				peek: [2]interface{}{datasets["single"][0], true},
+			},
+			{
+				name: "multiple elements",
+				data: datasets["multiple"],
+				peek: [2]interface{}{datasets["multiple"][0], true},
+			},
+		}
+
+		for _, tt := range tests {
+			t.Run(tt.name, func(t *testing.T) {
+				q := New[int]()
+
+				for _, data := range tt.data {
+					q.Push(data)
+				}
+
+				if got, ok := q.Peek(); got != tt.peek[0] || ok != tt.peek[1] {
+					t.Errorf("got %v, want %v", got, tt.peek)
+				}
+			})
+		}
+	})
+}
+
 func iterQueue[T any](node *Node[T]) chan T {
 	ch := make(chan T)
 

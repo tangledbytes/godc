@@ -95,3 +95,17 @@ func (q *Queue[T]) Pop() (T, bool) {
 		// -- retry
 	}
 }
+
+// Peek returns the next item in the queue without removing it
+func (q *Queue[T]) Peek() (T, bool) {
+	var def T
+
+	head := q.head.Load()
+	next := head.Next.Load()
+
+	if next == nil {
+		return def, false
+	}
+
+	return next.Data, true
+}

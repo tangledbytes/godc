@@ -1,5 +1,11 @@
 package util
 
+import (
+	"math/rand"
+)
+
+// GenerateIntSeries generates a slice of integers from start to end
+// where end is inclusive.
 func GenerateIntSeries(start, end int) []int {
 	var series []int
 	for i := start; i <= end; i++ {
@@ -8,6 +14,20 @@ func GenerateIntSeries(start, end int) []int {
 	return series
 }
 
+// GenerateRandomIntSeries generates a slice of integers from start to end
+// where end is inclusive and the slice is shuffled.
+func GenerateRandomIntSeries(start, end int) []int {
+	series := GenerateIntSeries(start, end)
+
+	rand.Shuffle(end-start+1, func(i, j int) {
+		series[i], series[j] = series[j], series[i]
+	})
+
+	return series
+}
+
+// CompareSliceUnordered compares two slices of comparable types
+// and returns true if they contain the same elements.
 func CompareSliceUnordered[T comparable](a, b []T) bool {
 	if len(a) != len(b) {
 		return false
