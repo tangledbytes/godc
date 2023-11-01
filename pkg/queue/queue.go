@@ -10,18 +10,18 @@ type Node[T any] struct {
 }
 
 type Queue[T any] struct {
-	head atomic.Pointer[Node[T]]
-	tail atomic.Pointer[Node[T]]
+	head *atomic.Pointer[Node[T]]
+	tail *atomic.Pointer[Node[T]]
 	len  atomic.Int64
 }
 
 func New[T any]() *Queue[T] {
 	sen := &Node[T]{}
 
-	head := atomic.Pointer[Node[T]]{}
+	head := &atomic.Pointer[Node[T]]{}
 	head.Store(sen)
 
-	tail := atomic.Pointer[Node[T]]{}
+	tail := &atomic.Pointer[Node[T]]{}
 	tail.Store(sen)
 
 	return &Queue[T]{

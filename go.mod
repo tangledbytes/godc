@@ -1,4 +1,4 @@
-module github.com/utkarsh-pro/godc
+module github.com/tangledbytes/godc
 
 go 1.20
 

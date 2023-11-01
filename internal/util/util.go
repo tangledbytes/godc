@@ -1,7 +1,9 @@
 package util
 
 import (
+	"fmt"
 	"math/rand"
+	"strings"
 )
 
 // GenerateIntSeries generates a slice of integers from start to end
@@ -45,4 +47,16 @@ func CompareSliceUnordered[T comparable](a, b []T) bool {
 	}
 
 	return true
+}
+
+// Assert panics if the condition is false.
+func Assert(cond bool, msg ...string) {
+	if !cond {
+		fmsg := "assertion failed"
+		if len(msg) != 0 {
+			fmsg = fmt.Sprintf("%s: %s", fmsg, strings.Join(msg, ", "))
+		}
+
+		panic(fmsg)
+	}
 }

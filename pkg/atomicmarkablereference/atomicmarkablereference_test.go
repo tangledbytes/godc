@@ -5,7 +5,7 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/utkarsh-pro/godc/pkg/atomicmarkablereference"
+	"github.com/tangledbytes/godc/pkg/atomicmarkablereference"
 )
 
 func Test_AtomicMarkableReference_New(t *testing.T) {

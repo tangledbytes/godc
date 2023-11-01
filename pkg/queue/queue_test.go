@@ -5,7 +5,7 @@ import (
 	"sync/atomic"
 	"testing"
 
-	"github.com/utkarsh-pro/godc/internal/util"
+	"github.com/tangledbytes/godc/internal/util"
 )
 
 func Test_Queue_Push(t *testing.T) {
